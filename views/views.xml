@@ -29,17 +29,17 @@
               parent="crm.crm_menu_root"
               sequence="10"
               action="crm_lead_opportunities"
+              groups="custom_crm_dsm.group_crm_custom_access"
               />
 
-    <!-- <record id="crm_lead_custom_menu_access_rule" model="ir.rule">
+    <record id="crm_lead_custom_menu_access_rule" model="ir.rule">
         <field name="name">CRM Lead Custom Menu Access</field>
         <field name="model_id" ref="model_crm_lead"/>
-        <field name="domain_force">[]</field>  
-        <field name="groups" eval="[(4, ref('custom_crm_dsm.group_crm_custom_access'))]"/> 
+        <field name="domain_force">[]</field>  <!-- Allow all records -->
+        <field name="groups" eval="[(4, ref('custom_crm_dsm.group_crm_custom_access'))]"/>  <!-- Your new user group -->
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="1"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_unlink" eval="1"/>
-    </record> -->
-
+    </record>
 </odoo>
