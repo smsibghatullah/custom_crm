@@ -29,7 +29,6 @@
               parent="crm.crm_menu_root"
               sequence="10"
               action="crm_lead_opportunities"
-              groups="custom_crm_dsm.group_crm_custom_access"
               />
 
     <record id="crm_lead_custom_menu_access_rule" model="ir.rule">
