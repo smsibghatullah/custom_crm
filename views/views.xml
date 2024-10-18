@@ -21,13 +21,20 @@
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[('stage_id', '=', 1)]</field>
-        <field name="context">{'search_default_all_companies': 1, 'group_by': 'company_id'}</field>
+        <field name="context">{'search_default_all_companies': 1, 'group_by': 'company_id', 'create': False, 'delete': False}</field>
     </record>
 
     <menuitem id="menu_crm_lead_custom_dashboard"
               name="Global Dashboard"
               parent="crm.crm_menu_root"
               sequence="10"
+              groups="custom_crm.group_crm_custom_access"
+              />
+
+    <menuitem id="menu_crm_lead_custom_dashboard_1"
+              name="Dashboard"
+              parent="custom_crm.menu_crm_lead_custom_dashboard"
+              sequence="9"
               action="crm_lead_opportunities"
               groups="custom_crm.group_crm_custom_access"
               />
@@ -35,11 +42,48 @@
     <record id="crm_lead_custom_menu_access_rule" model="ir.rule">
         <field name="name">CRM Lead Custom Menu Access</field>
         <field name="model_id" ref="model_crm_lead"/>
-        <field name="domain_force">[]</field>  <!-- Allow all records -->
-        <field name="groups" eval="[(4, ref('custom_crm.group_crm_custom_access'))]"/>  <!-- Your new user group -->
+        <field name="domain_force">[]</field> 
+        <field name="groups" eval="[(4, ref('custom_crm.group_crm_custom_access'))]"/>  
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="1"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_unlink" eval="1"/>
     </record>
+
+
+    <record id="view_crm_create_wizard" model="ir.ui.view">
+            <field name="name">crm.create.wizard.form</field>
+            <field name="model">crm.create.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create New CRM Record">
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id"/>
+                        <field name="res_partner"/>
+                        <field name="customer_price"/>
+                        <field name="rating"/>
+                    </group>
+                    <footer>
+                        <button string="Create" type="object" name="create_crm_record" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_crm_create_wizard" model="ir.actions.act_window">
+        <field name="name">Create CRM Record</field>
+        <field name="res_model">crm.create.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_crm_lead_custom_wizard"
+                name="Create New Item"
+                parent="custom_crm.menu_crm_lead_custom_dashboard"
+                sequence="10"
+                action="action_crm_create_wizard"
+                groups="custom_crm.group_crm_custom_access"
+    />
 </odoo>
