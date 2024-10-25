@@ -34,12 +34,13 @@ class CRMCreateWizard(models.TransientModel):
         ('2', 'High'),
         ('3', 'Very High'),
     ], string='Rating')
+    description = fields.Char(string='Internal Notes')
 
     def create_crm_record(self):
         lead = self.env['crm.lead'].sudo().create({
         'company_id': self.company_id.id,
         'partner_id': self.res_partner.id,
-        'planned_revenue': self.customer_price,
+        'description': self.description,
         'priority': self.rating,
         'name': self.name, 
         'stage_id':1 ,

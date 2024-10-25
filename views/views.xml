@@ -60,7 +60,7 @@
                         <field name="name"/>
                         <field name="company_id"/>
                         <field name="res_partner"/>
-                        <field name="customer_price"/>
+                        <field name="description"/>
                         <field name="rating"/>
                     </group>
                     <footer>
